@@ -15,11 +15,12 @@ int read_annotations(std::string full_filepath, std::vector<std::string> eeg_ch_
 
 int main()
 {
-    std::string path("F:/Postdoc_Calgary/Research/Persyst_Project/EEG_Clips/");
-    std::string ext(".lay");
     
-    //std::cout << "Current path is " << fs::current_path() << '\n'; //
-    path = fs::current_path().string() + "\\";
+    std::string path = fs::current_path().string() + "\\";
+	//std::string path("F:/Postdoc_Calgary/Research/Persyst_Project/EEG_Clips/");
+	std::cout << "Current path is " << path << '\n'; //
+
+    std::string ext(".lay");
 
 
     // Loop through all files in specified folder
