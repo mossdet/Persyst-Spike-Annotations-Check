@@ -22,13 +22,13 @@
     <ClCompile Include="src\AnnotationsCheck.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="AnnotationsCheck.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Persyst.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\resource.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
