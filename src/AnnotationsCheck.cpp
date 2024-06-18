@@ -17,7 +17,7 @@ int main()
 {
     
     std::string path = fs::current_path().string() + "\\";
-	//std::string path("F:/Postdoc_Calgary/Research/Persyst_Project/EEG_Clips/");
+	//path = "F:/Postdoc_Calgary/Research/Persyst_Project/EEG_Clips/";
 	std::cout << "Current path is " << path << '\n'; //
 
     std::string ext(".lay");
@@ -164,7 +164,11 @@ int read_annotations(std::string full_filepath, std::vector<std::string> eeg_ch_
 
                     std::string channel_label = line.substr(channel_pos+2, line.length()- channel_pos);
                     channel_label.erase(remove_if(channel_label.begin(), channel_label.end(), isspace), channel_label.end());
-                    std::transform(channel_label.begin(), channel_label.end(), channel_label.begin(), [](unsigned char c) { return std::tolower(c); });
+
+                    // to lowercase
+                    for (int i = 0; i < channel_label.size(); i++) {
+                        channel_label[i] = std::tolower(channel_label[i]);
+                    }
 
                     for (int i = 0; i < channel_label.size(); i++) {
                         channel_label[i] = std::tolower(channel_label[i]);
@@ -177,7 +181,7 @@ int read_annotations(std::string full_filepath, std::vector<std::string> eeg_ch_
                     std::string annot_time_sec = line.substr(0, line.find(','));
                     std::string annot_str = line.substr(line.find(annot_key), line.find("r="));
                     std::string reviewer_str = line.substr(line.find("r="), line.find("c="));
-                    std::string ch_str = line.substr(line.find("c="), line.length() - 1);
+                    std::string ch_str = line.substr(line.find("c=")+2, line.length() - 1);
 
                     float ann_total_seconds = std::stof(annot_time_sec);
 
@@ -205,7 +209,7 @@ int read_annotations(std::string full_filepath, std::vector<std::string> eeg_ch_
                     }
 
                     if (!annot_chann_label_ok) {
-                        std::string wrong_annot = "@Spike r=" + reviewer + "c=" + ch_str + "\t\t" + annot_time_str;
+                        std::string wrong_annot = "@Spike r=" + reviewer + " c=" + ch_str + "\t\t" + annot_time_str;
                         incorrect_annots_ch_labels.push_back(wrong_annot);
                     }
                 }
